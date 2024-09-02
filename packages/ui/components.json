@@ -7,8 +7,7 @@
     "config": "tailwind.config.js",
     "css": "@/globals.css",
     "baseColor": "slate",
-    "cssVariables": true,
-    "prefix": "ui-"
+    "cssVariables": true
   },
   "aliases": {
     "components": "@penny/ui/components",

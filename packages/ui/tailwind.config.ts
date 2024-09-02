@@ -4,8 +4,11 @@ import tailwindCssAnimate from "tailwindcss-animate";
 
 export default {
   darkMode: ["class"],
-  content: ["components/**/*.{ts,tsx}"],
-  prefix: "ui-",
+  content: [
+    "app/**/*.{ts,tsx}",
+    "components/**/*.{ts,tsx}",
+    "../../packages/ui/src/**/*.{ts,tsx,js,jsx}",
+  ],
   theme: {
     container: {
       center: true,

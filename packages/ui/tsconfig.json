@@ -3,10 +3,10 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@penny/ui/*": ["./src/*"]
+      "@penny/ui*": ["./src/*"]
     },
     "outDir": "dist"
   },
-  "include": ["src", "tailwind.config.ts"],
+  "include": ["src", "tailwind.config.ts", "postcss.config.mjs"],
   "exclude": ["node_modules", "dist"]
 }
