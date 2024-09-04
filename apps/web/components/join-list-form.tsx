@@ -1,11 +1,35 @@
+"use client";
+
 import { Button } from "@penny/ui/components/ui/button";
 import { Input } from "@penny/ui/components/ui/input";
+import { useFormState, useFormStatus } from "react-dom";
+import { joinListAction } from "../actions/join-list-action";
 
 export const JoinListForm: React.FC = () => {
+  const [state, formAction] = useFormState(joinListAction, { message: "" });
+
   return (
-    <form className="flex flex-col md:flex-row md:items-center gap-3">
-      <Input type="email" placeholder="email@yako.com" />
-      <Button type="submit">Join the waitlist</Button>
-    </form>
+    <div className="flex flex-col gap-2">
+      <form
+        action={formAction}
+        className="flex flex-col md:flex-row md:items-center gap-3"
+      >
+        <Input name="email" type="email" placeholder="email@yako.com" />
+        <FormButton />
+      </form>
+      {state.message && (
+        <p className="text-xs text-secondary-foreground/80">{state.message}</p>
+      )}
+    </div>
+  );
+};
+
+const FormButton = () => {
+  const { pending } = useFormStatus();
+
+  return (
+    <Button disabled={pending} type="submit">
+      {pending ? "Adding you to the list" : "Join the waitlist"}
+    </Button>
   );
 };
