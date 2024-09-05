@@ -7,6 +7,6 @@
     },
     "outDir": "dist"
   },
-  "include": ["src", "tailwind.config.ts", "postcss.config.mjs"],
+  "include": ["src", "tailwind.config.ts", "postcss.config.ts"],
   "exclude": ["node_modules", "dist"]
 }

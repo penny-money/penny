@@ -4,7 +4,7 @@
   "private": true,
   "exports": {
     "./globals.css": "./src/globals.css",
-    "./postcss.config": "./postcss.config.mjs",
+    "./postcss.config": "./postcss.config.ts",
     "./tailwind.config": "./tailwind.config.ts",
     "./lib/*": "./src/lib/*.ts",
     "./icons/*": "./src/components/icons/*.ts",
@@ -13,6 +13,7 @@
       "./src/components/*.ts"
     ]
   },
+  "types": "index.d.ts",
   "scripts": {
     "lint": "eslint . --max-warnings 0",
     "generate:component": "turbo gen react-component"
