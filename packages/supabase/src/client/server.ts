@@ -1,5 +1,6 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies, headers } from "next/headers.js";
+import { Database } from "../types/db.js";
 
 type CreateClientOptions = {
   admin?: boolean;
@@ -23,24 +24,28 @@ export const createClient = (options?: CreateClientOptions) => {
       }
     : {};
 
-  return createServerClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, key, {
-    ...rest,
-    cookies: {
-      getAll: () => cookieStore.getAll(),
-      setAll: (cookiesToSet) => {
-        try {
-          cookiesToSet.forEach(({ name, value, options }) =>
-            cookieStore.set(name, value, options),
-          );
-        } catch (error) {}
+  return createServerClient<Database>(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    key,
+    {
+      ...rest,
+      cookies: {
+        getAll: () => cookieStore.getAll(),
+        setAll: (cookiesToSet) => {
+          try {
+            cookiesToSet.forEach(({ name, value, options }) =>
+              cookieStore.set(name, value, options),
+            );
+          } catch (error) {}
+        },
+      },
+      auth,
+      global: {
+        headers: {
+          // Pass user agent from browser
+          "user-agent": headers().get("user-agent") as string,
+        },
       },
     },
-    auth,
-    global: {
-      headers: {
-        // Pass user agent from browser
-        "user-agent": headers().get("user-agent") as string,
-      },
-    },
-  });
+  );
 };

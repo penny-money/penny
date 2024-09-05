@@ -18,7 +18,9 @@ export const JoinListForm: React.FC = () => {
         <FormButton />
       </form>
       {state.message && (
-        <p className="text-xs text-secondary-foreground/80">{state.message}</p>
+        <p className="text-xs text-secondary-foreground/80 max-w-[54ch]">
+          {state.message}
+        </p>
       )}
     </div>
   );

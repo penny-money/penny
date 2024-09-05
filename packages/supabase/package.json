@@ -17,5 +17,8 @@
     "./server": "./src/client/server.ts",
     "./client": "./src/client/client.ts",
     "./middleware": "./src/client/middleware.ts"
+  },
+  "scripts": {
+    "db:gen": "supabase gen types --lang=typescript --project-id $PROJECT_ID --schema public > src/types/db.ts"
   }
 }
