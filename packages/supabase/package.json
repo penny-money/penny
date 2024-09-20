@@ -1,5 +1,5 @@
 {
-  "name": "@v1/supabase",
+  "name": "@penny/supabase",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@supabase/ssr": "^0.5.1",
-    "@v1/logger": "workspace:*",
+    "@penny/logger": "workspace:*",
     "react": "^18.3.1",
     "server-only": "^0.0.1",
     "supabase": "^1.191.3"

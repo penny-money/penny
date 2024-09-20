@@ -1,17 +1,21 @@
 {
-  "name": "v1",
+  "name": "penny",
   "private": true,
-  "workspaces": ["packages/*", "apps/*", "tooling/*"],
+  "workspaces": [
+    "packages/*",
+    "apps/*",
+    "tooling/*"
+  ],
   "scripts": {
     "build": "turbo build",
     "clean": "git clean -xdf node_modules",
     "clean:workspaces": "turbo clean",
     "dev": "turbo dev --parallel",
-    "dev:web": "turbo dev --filter=@v1/web",
-    "dev:jobs": "turbo jobs --filter=@v1/jobs",
-    "dev:app": "turbo dev --filter=@v1/app",
-    "start:web": "turbo start --filter=@v1/web",
-    "start:app": "turbo start --filter=@v1/app",
+    "dev:web": "turbo dev --filter=@penny/web",
+    "dev:jobs": "turbo jobs --filter=@penny/jobs",
+    "dev:app": "turbo dev --filter=@penny/app",
+    "start:web": "turbo start --filter=@penny/web",
+    "start:app": "turbo start --filter=@penny/app",
     "test": "turbo test --parallel",
     "format": "biome format --write .",
     "lint": "turbo lint && bun lint:repo",
@@ -25,5 +29,5 @@
     "turbo": "2.1.1",
     "typescript": "^5.5.4"
   },
-  "packageManager": "bun@1.1.26"
+  "packageManager": "bun@1.1.28"
 }
