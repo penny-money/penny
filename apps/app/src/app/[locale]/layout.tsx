@@ -1,13 +1,13 @@
-import "@v1/ui/globals.css";
+import "@penny/ui/globals.css";
 import { Footer } from "@/components/footer";
-import { cn } from "@v1/ui/cn";
+import { cn } from "@penny/ui/cn";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 
 export const metadata: Metadata = {
-  title: "Create v1",
+  title: "Create penny",
   description: "Production ready Next.js app",
 };
 

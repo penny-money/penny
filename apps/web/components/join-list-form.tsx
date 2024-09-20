@@ -1,7 +1,7 @@
 "use client";
 
-import { Button } from "@penny/ui/components/ui/button";
-import { Input } from "@penny/ui/components/ui/input";
+import { Button } from "@penny/ui/button";
+import { Input } from "@penny/ui/input";
 import { useFormState, useFormStatus } from "react-dom";
 import { joinListAction } from "../actions/join-list-action";
 

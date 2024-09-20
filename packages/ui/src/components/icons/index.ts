@@ -1,1 +1,1 @@
-export { Landmark } from "lucide-react";
+export * from "lucide-react";

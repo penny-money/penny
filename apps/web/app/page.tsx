@@ -1,5 +1,5 @@
-import { Button } from "@penny/ui/components/ui/button";
-import { Landmark } from "@penny/ui/icons/index";
+import { Button } from "@penny/ui/button";
+import { Landmark } from "@penny/ui/icons";
 import Link from "next/link";
 import BrainCircuit from "../components/icons/brain-circuit";
 import { Feature } from "../components/feature";

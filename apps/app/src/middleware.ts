@@ -1,4 +1,4 @@
-import { updateSession } from "@v1/supabase/middleware";
+import { updateSession } from "@penny/supabase/middleware";
 import { createI18nMiddleware } from "next-international/middleware";
 import { type NextRequest, NextResponse } from "next/server";
 

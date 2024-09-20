@@ -1,11 +1,7 @@
 {
   "name": "penny",
   "private": true,
-  "workspaces": [
-    "packages/*",
-    "apps/*",
-    "tooling/*"
-  ],
+  "workspaces": ["packages/*", "apps/*", "tooling/*"],
   "scripts": {
     "build": "turbo build",
     "clean": "git clean -xdf node_modules",

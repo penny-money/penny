@@ -3,11 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "sideEffects": false,
-  "files": [
-    "tailwind.config.ts",
-    "postcss.config.js",
-    "globals.css"
-  ],
+  "files": ["tailwind.config.ts", "postcss.config.js", "globals.css"],
   "scripts": {
     "clean": "rm -rf .turbo node_modules",
     "lint": "biome check .",
@@ -29,7 +25,7 @@
     "./input": "./src/components/input.tsx",
     "./tooltip": "./src/components/tooltip.tsx",
     "./dialog": "./src/components/dialog.tsx",
-    "./icons": "./src/components/icons.tsx",
+    "./icons": "./src/components/icons/index.ts",
     "./tailwind.config": "./tailwind.config.ts",
     "./postcss": "./postcss.config.js"
   },
