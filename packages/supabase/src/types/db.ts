@@ -9,186 +9,75 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      accounts: {
+      posts: {
         Row: {
-          balance: number;
+          content: string;
           created_at: string;
           id: string;
-          name: string;
-          type: Database["public"]["Enums"]["account_type"];
+          title: string;
           updated_at: string;
           user_id: string;
         };
         Insert: {
-          balance?: number;
+          content: string;
           created_at?: string;
           id?: string;
-          name: string;
-          type: Database["public"]["Enums"]["account_type"];
+          title: string;
           updated_at?: string;
           user_id: string;
         };
         Update: {
-          balance?: number;
+          content?: string;
           created_at?: string;
           id?: string;
-          name?: string;
-          type?: Database["public"]["Enums"]["account_type"];
+          title?: string;
           updated_at?: string;
           user_id?: string;
         };
         Relationships: [
           {
-            foreignKeyName: "accounts_user_id_profiles_id_fk";
+            foreignKeyName: "fk_posts_user";
             columns: ["user_id"];
             isOneToOne: false;
-            referencedRelation: "profiles";
+            referencedRelation: "users";
             referencedColumns: ["id"];
           },
         ];
       };
-      envelopes: {
-        Row: {
-          account_id: string | null;
-          budget: number;
-          created_at: string;
-          id: string;
-          name: string;
-          updated_at: string;
-          user_id: string;
-        };
-        Insert: {
-          account_id?: string | null;
-          budget: number;
-          created_at?: string;
-          id?: string;
-          name: string;
-          updated_at?: string;
-          user_id: string;
-        };
-        Update: {
-          account_id?: string | null;
-          budget?: number;
-          created_at?: string;
-          id?: string;
-          name?: string;
-          updated_at?: string;
-          user_id?: string;
-        };
-        Relationships: [
-          {
-            foreignKeyName: "envelopes_account_id_accounts_id_fk";
-            columns: ["account_id"];
-            isOneToOne: false;
-            referencedRelation: "accounts";
-            referencedColumns: ["id"];
-          },
-          {
-            foreignKeyName: "envelopes_user_id_profiles_id_fk";
-            columns: ["user_id"];
-            isOneToOne: false;
-            referencedRelation: "profiles";
-            referencedColumns: ["id"];
-          },
-        ];
-      };
-      profiles: {
+      users: {
         Row: {
           avatar_url: string | null;
+          created_at: string | null;
           email: string;
           full_name: string | null;
           id: string;
-          name: string | null;
-          updated_at: string;
-          user_name: string | null;
+          updated_at: string | null;
         };
         Insert: {
           avatar_url?: string | null;
+          created_at?: string | null;
           email: string;
           full_name?: string | null;
           id: string;
-          name?: string | null;
-          updated_at?: string;
-          user_name?: string | null;
+          updated_at?: string | null;
         };
         Update: {
           avatar_url?: string | null;
+          created_at?: string | null;
           email?: string;
           full_name?: string | null;
           id?: string;
-          name?: string | null;
-          updated_at?: string;
-          user_name?: string | null;
+          updated_at?: string | null;
         };
         Relationships: [
           {
-            foreignKeyName: "profiles_id_users_id_fk";
+            foreignKeyName: "fk_auth_user";
             columns: ["id"];
             isOneToOne: true;
             referencedRelation: "users";
             referencedColumns: ["id"];
           },
         ];
-      };
-      transactions: {
-        Row: {
-          account_id: string;
-          amount: number;
-          created_at: string;
-          description: string | null;
-          envelope_id: string | null;
-          id: string;
-        };
-        Insert: {
-          account_id: string;
-          amount: number;
-          created_at?: string;
-          description?: string | null;
-          envelope_id?: string | null;
-          id?: string;
-        };
-        Update: {
-          account_id?: string;
-          amount?: number;
-          created_at?: string;
-          description?: string | null;
-          envelope_id?: string | null;
-          id?: string;
-        };
-        Relationships: [
-          {
-            foreignKeyName: "transactions_account_id_accounts_id_fk";
-            columns: ["account_id"];
-            isOneToOne: false;
-            referencedRelation: "accounts";
-            referencedColumns: ["id"];
-          },
-          {
-            foreignKeyName: "transactions_envelope_id_envelopes_id_fk";
-            columns: ["envelope_id"];
-            isOneToOne: false;
-            referencedRelation: "envelopes";
-            referencedColumns: ["id"];
-          },
-        ];
-      };
-      waitlist: {
-        Row: {
-          created_at: string;
-          email: string;
-          id: number;
-        };
-        Insert: {
-          created_at?: string;
-          email: string;
-          id?: number;
-        };
-        Update: {
-          created_at?: string;
-          email?: string;
-          id?: number;
-        };
-        Relationships: [];
       };
     };
     Views: {
@@ -198,7 +87,7 @@ export type Database = {
       [_ in never]: never;
     };
     Enums: {
-      account_type: "current" | "savings" | "loan";
+      [_ in never]: never;
     };
     CompositeTypes: {
       [_ in never]: never;

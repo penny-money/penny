@@ -1,6 +1,14 @@
 {
-  "extends": "@penny/typescript-config/nextjs.json",
+  "extends": "@v1/typescript/nextjs.json",
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "strict": true,
+    "allowJs": true,
+    "noEmit": true,
+    "jsx": "preserve",
     "plugins": [
       {
         "name": "next"
@@ -9,11 +17,11 @@
   },
   "include": [
     "next-env.d.ts",
-    "next.config.mjs",
-    "postcss.config.mjs",
+    "next.config.js",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "tailwind.config.ts"
   ],
   "exclude": ["node_modules"]
 }

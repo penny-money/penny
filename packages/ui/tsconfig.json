@@ -1,12 +1,11 @@
 {
-  "extends": "@penny/typescript-config/react-library.json",
+  "extends": "@v1/typescript/react-library.json",
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@penny/ui*": ["./src/*"]
-    },
-    "outDir": "dist"
+      "@/*": ["./src/*"]
+    }
   },
-  "include": ["src", "tailwind.config.ts", "postcss.config.ts"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["src"],
+  "exclude": ["node_modules"]
 }

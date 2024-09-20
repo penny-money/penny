@@ -1,10 +1,16 @@
 {
-  "name": "@penny/supabase",
-  "type": "module",
-  "version": "0.0.1",
+  "name": "@v1/supabase",
+  "version": "1.0.0",
   "private": true,
+  "scripts": {
+    "clean": "rm -rf .turbo node_modules",
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "typecheck": "tsc --noEmit"
+  },
   "dependencies": {
     "@supabase/ssr": "^0.5.1",
+    "@v1/logger": "workspace:*",
     "react": "^18.3.1",
     "server-only": "^0.0.1",
     "supabase": "^1.191.3"
@@ -14,11 +20,11 @@
     "typescript": "^5.5.4"
   },
   "exports": {
-    "./server": "./src/client/server.ts",
-    "./client": "./src/client/client.ts",
-    "./middleware": "./src/client/middleware.ts"
-  },
-  "scripts": {
-    "db:gen": "supabase gen types --lang=typescript --project-id $PROJECT_ID --schema public > src/types/db.ts"
+    "./server": "./src/clients/server.ts",
+    "./client": "./src/clients/client.ts",
+    "./mutations": "./src/mutations/index.ts",
+    "./middleware": "./src/clients/middleware.ts",
+    "./queries": "./src/queries/index.ts",
+    "./types": "./src/types/index.ts"
   }
 }
