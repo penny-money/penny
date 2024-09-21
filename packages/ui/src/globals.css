@@ -4,26 +4,44 @@
 
 @layer base {
   :root {
-    --background: 32 57% 95%;
-    --foreground: 248 19% 40%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 248 19% 40%;
-    --primary-foreground: 32 57% 95%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-    --radius: 0.5rem;
+    /* light primitives */
+    --base-dawn: 32 57% 95%;
+    --surface-dawn: 35 100% 98%;
+    --overlay-dawn: 33 43% 91%;
+    --muted-dawn: 257 9% 61%;
+    --subtle-dawn: 248 12% 52%;
+    --text-dawn: 248 19% 40%;
+    --love-dawn: 343 35% 55%;
+    --gold-dawn: 35 81% 56%;
+    --rose-dawn: 3 53% 67%;
+    --pine-dawn: 197 53% 34%;
+    --foam-dawn: 189 30% 48%;
+    --iris-dawn: 268 21% 57%;
+    --highlight-low-dawn: 25 35% 93%;
+    --hightlight-med-dawn: 10 9% 86%;
+    --highlight-high-dawn: 315 4% 80%;
+
+    /* tokens */
+    --background: var(--base-dawn);
+    --foreground: var(--text-dawn);
+    --card: var(--surface-dawn);
+    --card-foreground: var(--text-dawn);
+    --popover: var(--overlay-dawn);
+    --popover-foreground: var(--text-dawn);
+    --primary: var(--pine-dawn);
+    --primary-foreground: var(--base-dawn);
+    --secondary: var(--surface-dawn);
+    --secondary-foreground: var(--subtle-dawn);
+    --muted: var(--muted-dawn) / 0.2;
+    --muted-foreground: var(--muted-dawn);
+    --accent: var(--hightlight-med-dawn);
+    --accent-foreground: var(--text-dawn);
+    --destructive: var(--love-dawn) / 0.2;
+    --destructive-foreground: var(--love-dawn);
+    --border: var(--highlight-high-dawn);
+    --input: var(--highlight-high-dawn);
+    --ring: var(--hightlight-med-dawn);
+    --radius: 0;
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;
@@ -32,25 +50,43 @@
   }
 
   .dark {
-    --background: 249 22% 12%;
-    --foreground: 245 50% 91%;
-    --card: 0 0% 3%;
-    --card-foreground: 0 0% 100%;
-    --popover: 0 0% 3%;
-    --popover-foreground: 0 0% 100%;
-    --primary: 245 50% 91%;
-    --primary-foreground: 249 22% 12%;
-    --secondary: 0 0% 10%;
-    --secondary-foreground: 0 0% 100%;
-    --muted: 0 0% 10%;
-    --muted-foreground: 0 0% 70%;
-    --accent: 0 0% 15%;
-    --accent-foreground: 0 0% 100%;
-    --destructive: 0 100% 30%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
-    --ring: 0 0% 80%;
+    /* dark primitives */
+    --base-main: 249 22% 12%;
+    --surface-main: 247 23% 15%;
+    --overlay-main: 248 25% 18%;
+    --muted-main: 249 12% 47%;
+    --subtle-main: 248 15% 61%;
+    --text-main: 245 50% 91%;
+    --love-main: 343 76% 68%;
+    --gold-main: 35 88% 72%;
+    --rose-main: 2 55% 83%;
+    --pine-main: 197 49% 38%;
+    --foam-main: 189 43% 73%;
+    --iris-main: 267 57% 78%;
+    --highlight-low-main: 244 18% 15%;
+    --hightlight-med-main: 249 15% 28%;
+    --highlight-high-main: 248 13% 36%;
+
+    /* tokens */
+    --background: var(--base-main);
+    --foreground: var(--text-main);
+    --card: var(--surface-main);
+    --card-foreground: var(--text-main);
+    --popover: var(--overlay-main);
+    --popover-foreground: var(--text-main);
+    --primary: var(--pine-main);
+    --primary-foreground: var(--foam-main);
+    --secondary: var(--surface-main);
+    --secondary-foreground: var(--subtle-main);
+    --muted: var(--muted-main) / 0.2;
+    --muted-foreground: var(--muted-main);
+    --accent: var(--hightlight-med-main);
+    --accent-foreground: var(--text-main);
+    --destructive: var(--love-main);
+    --destructive-foreground: var(--rose-main);
+    --border: var(--highlight-high-main);
+    --input: var(--highlight-high-main);
+    --ring: var(--hightlight-med-main);
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
@@ -67,4 +103,3 @@
     @apply bg-background text-foreground;
   }
 }
-
