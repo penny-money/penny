@@ -17,6 +17,7 @@ export function GoogleSignin() {
 
   return (
     <Button onClick={handleSignin} variant="outline" className="font-mono">
+      {/* TODO:(@akuya-ekorot): Localize text */}
       Sign in with Google
     </Button>
   );

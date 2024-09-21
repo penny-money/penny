@@ -3,7 +3,7 @@ import { createI18nMiddleware } from "next-international/middleware";
 import { type NextRequest, NextResponse } from "next/server";
 
 const I18nMiddleware = createI18nMiddleware({
-  locales: ["en", "fr"],
+  locales: ["en", "fr", "sw"],
   defaultLocale: "en",
   urlMappingStrategy: "rewrite",
 });
