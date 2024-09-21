@@ -54,25 +54,25 @@ export const authActionClient = actionClientWithMeta
 
     return result;
   })
-  .use(async ({ next, metadata }) => {
-    const ip = headers().get("x-forwarded-for");
-
-    const { success, remaining } = await ratelimit.limit(
-      `${ip}-${metadata.name}`,
-    );
-
-    if (!success) {
-      throw new Error("Too many requests");
-    }
-
-    return next({
-      ctx: {
-        ratelimit: {
-          remaining,
-        },
-      },
-    });
-  })
+  // .use(async ({ next, metadata }) => {
+  //   const ip = headers().get("x-forwarded-for");
+  //
+  //   const { success, remaining } = await ratelimit.limit(
+  //     `${ip}-${metadata.name}`,
+  //   );
+  //
+  //   if (!success) {
+  //     throw new Error("Too many requests");
+  //   }
+  //
+  //   return next({
+  //     ctx: {
+  //       ratelimit: {
+  //         remaining,
+  //       },
+  //     },
+  //   });
+  // })
   .use(async ({ next, metadata }) => {
     const {
       data: { user },
