@@ -2,6 +2,7 @@
 
 import { createClient } from "@penny/supabase/client";
 import { Button } from "@penny/ui/button";
+import { GoogleIcon } from "@penny/ui/icons";
 
 export function GoogleSignin() {
   const supabase = createClient();
@@ -16,9 +17,9 @@ export function GoogleSignin() {
   };
 
   return (
-    <Button onClick={handleSignin} variant="outline" className="font-mono">
-      {/* TODO:(@akuya-ekorot): Localize text */}
-      Sign in with Google
+    <Button size="lg" onClick={handleSignin} className="gap-4">
+      <GoogleIcon className="size-6" />
+      <span>Continue with Google</span>
     </Button>
   );
 }
