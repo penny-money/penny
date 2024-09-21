@@ -37,4 +37,3 @@ enabled = true
 port = 54327
 vector_port = 54328
 backend = "postgres"
-
