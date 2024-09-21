@@ -38,4 +38,3 @@ export const GoogleIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => {
     </svg>
   );
 };
-
