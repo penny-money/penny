@@ -1,31 +1,42 @@
-import { NavbarLink } from "@/components/navbar/navbar-link";
 import { getI18n } from "@/locales/server";
-import { getUser } from "@penny/supabase/queries";
+import { WalletCards } from "@penny/ui/icons";
+import Link from "next/link";
 
 export default async function Layout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const { data } = await getUser();
   const t = await getI18n();
 
   return (
-    <div className="h-screen w-screen grid grid-cols-12">
-      <nav className="col-span-2 h-full text-secondary-foreground border-r text-sm">
-        <ul className="divide-y">
-          <li className="p-2">
-            <p className="text-sm">
-              {t("welcome", { name: data?.user?.email })}
-            </p>
+    <div className="h-screen w-screen flex">
+      <aside className="flex-shrink-0 px-4 border-r bg-secondary">
+        <ul className="flex flex-col gap-2 mt-2 space-y-4">
+          <li>
+            <Link
+              href="/"
+              className="text-3xl font-semibold size-10 flex items-center justify-center"
+            >
+              p.
+            </Link>
           </li>
-          <li className="p-2">
-            <ul className="divide-y">
-              <NavbarLink href="./accounts" name="Accounts" />
-            </ul>
+          <li>
+            <nav>
+              <ul className="space-y-2">
+                <li>
+                  <Link
+                    className="hover:bg-accent hover:border size-10 flex items-center justify-center"
+                    href="./accounts"
+                  >
+                    <WalletCards className="size-6" />
+                  </Link>
+                </li>
+              </ul>
+            </nav>
           </li>
         </ul>
-      </nav>
+      </aside>
       <main className="col-span-10 h-full">{children}</main>
     </div>
   );
