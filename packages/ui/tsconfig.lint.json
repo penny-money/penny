@@ -1,5 +1,5 @@
 {
-  "extends": "@penny/typescript-config/react-library.json",
+  "extends": "@penny/typescript/react-library.json",
   "compilerOptions": {
     "outDir": "dist"
   },
