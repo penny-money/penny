@@ -41,7 +41,7 @@
     --border: var(--highlight-high-dawn);
     --input: var(--highlight-high-dawn);
     --ring: var(--hightlight-med-dawn);
-    --radius: 0;
+    --radius: 0rem;
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;
@@ -75,7 +75,7 @@
     --popover: var(--overlay-main);
     --popover-foreground: var(--text-main);
     --primary: var(--pine-main);
-    --primary-foreground: var(--foam-main);
+    --primary-foreground: var(--text-main);
     --secondary: var(--surface-main);
     --secondary-foreground: var(--subtle-main);
     --muted: var(--muted-main) / 0.2;
