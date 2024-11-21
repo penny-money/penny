@@ -8,8 +8,8 @@ const server: Parameters<typeof createEnv>[0]["server"] = {
   RESEND_FROM: z.string().min(1).email(),
   DATABASE_URL: z.string().min(1).url(),
   RESEND_TOKEN: z.string().min(1).startsWith("re_"),
-  STRIPE_SECRET_KEY: z.string().min(1).startsWith("sk_"),
-  STRIPE_WEBHOOK_SECRET: z.string().min(1).startsWith("whsec_"),
+  // STRIPE_SECRET_KEY: z.string().min(1).startsWith("sk_").optional(),
+  // STRIPE_WEBHOOK_SECRET: z.string().min(1).startsWith("whsec_").optional(),
   BETTERSTACK_API_KEY: z.string().min(1),
   BETTERSTACK_URL: z.string().min(1).url(),
   ARCJET_KEY: z.string().min(1).startsWith("ajkey_"),
@@ -19,7 +19,7 @@ const server: Parameters<typeof createEnv>[0]["server"] = {
     .min(1)
     .startsWith("sk_")
     .or(z.string().min(1).startsWith("testsk_")),
-  LIVEBLOCKS_SECRET: z.string().min(1).startsWith("sk_").optional(),
+  // LIVEBLOCKS_SECRET: z.string().min(1).startsWith("sk_").optional(),
 
   // Added by Sentry Integration, Vercel Marketplace
   SENTRY_ORG: z.string().min(1).optional(),
@@ -58,8 +58,8 @@ export const env = createEnv({
     RESEND_FROM: process.env.RESEND_FROM,
     DATABASE_URL: process.env.DATABASE_URL,
     RESEND_TOKEN: process.env.RESEND_TOKEN,
-    STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
-    STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
+    // STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
+    // STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
     BETTERSTACK_API_KEY: process.env.BETTERSTACK_API_KEY,
     BETTERSTACK_URL: process.env.BETTERSTACK_URL,
     ARCJET_KEY: process.env.ARCJET_KEY,
@@ -70,7 +70,7 @@ export const env = createEnv({
     NEXT_RUNTIME: process.env.NEXT_RUNTIME,
     FLAGS_SECRET: process.env.FLAGS_SECRET,
     SVIX_TOKEN: process.env.SVIX_TOKEN,
-    LIVEBLOCKS_SECRET: process.env.LIVEBLOCKS_SECRET,
+    // LIVEBLOCKS_SECRET: process.env.LIVEBLOCKS_SECRET,
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:
       process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
     NEXT_PUBLIC_CLERK_SIGN_IN_URL: process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL,
