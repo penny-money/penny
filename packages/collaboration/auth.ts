@@ -1,11 +1,11 @@
-import "server-only";
-import { Liveblocks as LiveblocksNode } from "@liveblocks/node";
-import { env } from "@repo/env";
+import 'server-only';
+import { Liveblocks as LiveblocksNode } from '@liveblocks/node';
+import { env } from '@repo/env';
 
 type AuthenticateOptions = {
   userId: string;
   orgId: string;
-  userInfo: Liveblocks["UserMeta"]["info"];
+  userInfo: Liveblocks['UserMeta']['info'];
 };
 
 export const authenticate = async ({

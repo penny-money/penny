@@ -1,24 +1,24 @@
-import { createEnv } from "@t3-oss/env-nextjs";
-import { z } from "zod";
+import { createEnv } from '@t3-oss/env-nextjs';
+import { z } from 'zod';
 
-const server: Parameters<typeof createEnv>[0]["server"] = {
-  CLERK_SECRET_KEY: z.string().min(1).startsWith("sk_"),
-  CLERK_WEBHOOK_SECRET: z.string().min(1).startsWith("whsec_"),
+const server: Parameters<typeof createEnv>[0]['server'] = {
+  CLERK_SECRET_KEY: z.string().min(1).startsWith('sk_'),
+  CLERK_WEBHOOK_SECRET: z.string().min(1).startsWith('whsec_'),
   RESEND_AUDIENCE_ID: z.string().min(1),
   RESEND_FROM: z.string().min(1).email(),
   DATABASE_URL: z.string().min(1).url(),
-  RESEND_TOKEN: z.string().min(1).startsWith("re_"),
+  RESEND_TOKEN: z.string().min(1).startsWith('re_'),
   // STRIPE_SECRET_KEY: z.string().min(1).startsWith("sk_").optional(),
   // STRIPE_WEBHOOK_SECRET: z.string().min(1).startsWith("whsec_").optional(),
   BETTERSTACK_API_KEY: z.string().min(1),
   BETTERSTACK_URL: z.string().min(1).url(),
-  ARCJET_KEY: z.string().min(1).startsWith("ajkey_"),
+  ARCJET_KEY: z.string().min(1).startsWith('ajkey_'),
   ANALYZE: z.string().optional(),
   SVIX_TOKEN: z
     .string()
     .min(1)
-    .startsWith("sk_")
-    .or(z.string().min(1).startsWith("testsk_")),
+    .startsWith('sk_')
+    .or(z.string().min(1).startsWith('testsk_')),
   // LIVEBLOCKS_SECRET: z.string().min(1).startsWith("sk_").optional(),
 
   // Added by Sentry Integration, Vercel Marketplace
@@ -27,21 +27,21 @@ const server: Parameters<typeof createEnv>[0]["server"] = {
 
   // Added by Vercel
   VERCEL: z.string().optional(),
-  NEXT_RUNTIME: z.enum(["nodejs", "edge"]).optional(),
+  NEXT_RUNTIME: z.enum(['nodejs', 'edge']).optional(),
   FLAGS_SECRET: z.string().min(1),
 };
 
-const client: Parameters<typeof createEnv>[0]["client"] = {
-  NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string().min(1).startsWith("pk_"),
-  NEXT_PUBLIC_CLERK_SIGN_IN_URL: z.string().min(1).startsWith("/"),
-  NEXT_PUBLIC_CLERK_SIGN_UP_URL: z.string().min(1).startsWith("/"),
-  NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL: z.string().min(1).startsWith("/"),
-  NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL: z.string().min(1).startsWith("/"),
+const client: Parameters<typeof createEnv>[0]['client'] = {
+  NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string().min(1).startsWith('pk_'),
+  NEXT_PUBLIC_CLERK_SIGN_IN_URL: z.string().min(1).startsWith('/'),
+  NEXT_PUBLIC_CLERK_SIGN_UP_URL: z.string().min(1).startsWith('/'),
+  NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL: z.string().min(1).startsWith('/'),
+  NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL: z.string().min(1).startsWith('/'),
   NEXT_PUBLIC_APP_URL: z.string().min(1).url(),
   NEXT_PUBLIC_WEB_URL: z.string().min(1).url(),
   NEXT_PUBLIC_DOCS_URL: z.string().min(1).url(),
-  NEXT_PUBLIC_GA_MEASUREMENT_ID: z.string().min(1).startsWith("G-"),
-  NEXT_PUBLIC_POSTHOG_KEY: z.string().min(1).startsWith("phc_"),
+  NEXT_PUBLIC_GA_MEASUREMENT_ID: z.string().min(1).startsWith('G-'),
+  NEXT_PUBLIC_POSTHOG_KEY: z.string().min(1).startsWith('phc_'),
   NEXT_PUBLIC_POSTHOG_HOST: z.string().min(1).url(),
 
   // Added by Vercel
