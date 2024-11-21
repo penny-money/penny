@@ -1,8 +1,0 @@
-{
-  "extends": "@penny/typescript/react-library.json",
-  "compilerOptions": {
-    "outDir": "dist"
-  },
-  "include": ["src", "turbo", "tailwind.config.ts", "postcss.config.ts"],
-  "exclude": ["node_modules", "dist"]
-}
