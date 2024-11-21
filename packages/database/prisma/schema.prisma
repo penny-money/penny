@@ -12,10 +12,139 @@ datasource db {
   relationMode = "prisma"
 }
 
-// This is a stub model.
-// Delete it and add your own Prisma models.
-model Page {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+model User {
+  id        String    @id @default(cuid())
+  email     String    @unique
+  name      String
+  accounts  Account[]
+  budgets   Budget[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Account {
+  id           String        @id @default(cuid())
+  userId       String
+  name         String
+  type         AccountType
+  balance      Int           @default(0)
+  currency     String
+  isActive     Boolean       @default(true)
+  transactions Transaction[]
+  budgets      Budget[]
+  user         User          @relation(fields: [userId], references: [id])
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  @@index([userId])
+}
+
+enum AccountType {
+  BANK
+  MOBILE_MONEY
+  LOAN
+  INVESTMENT
+  CREDIT_CARD
+  CASH
+}
+
+model Budget {
+  id                 String         @id @default(cuid())
+  userId             String
+  name               String
+  description        String?
+  targetAmount       Int
+  assignedAmount     Int            @default(0)
+  spentAmount        Int            @default(0)
+  startDate          DateTime
+  endDate            DateTime?
+  isRecurring        Boolean        @default(false)
+  recurringPeriod    Period?
+  recurringFrequency Int?
+  recurringDays      Int[]
+  recurringWeeks     Int[]
+  nextRecurrence     DateTime?
+  category           BudgetCategory
+  transactions       Transaction[]
+  account            Account?       @relation(fields: [accountId], references: [id])
+  accountId          String?
+  user               User           @relation(fields: [userId], references: [id])
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
+
+  @@index([userId])
+  @@index([accountId])
+}
+
+enum Period {
+  DAILY
+  WEEKLY
+  MONTHLY
+  QUARTERLY
+  YEARLY
+}
+
+enum BudgetCategory {
+  HOUSING
+  TRANSPORTATION
+  FOOD
+  UTILITIES
+  HEALTHCARE
+  SAVINGS
+  DEBT
+  ENTERTAINMENT
+  EDUCATION
+  SHOPPING
+  OTHER
+}
+
+model Transaction {
+  id          String              @id @default(cuid())
+  accountId   String
+  budgetId    String?
+  amount      Int
+  type        TransactionType
+  description String
+  date        DateTime
+  category    TransactionCategory
+  status      TransactionStatus   @default(COMPLETED)
+  account     Account             @relation(fields: [accountId], references: [id])
+  budget      Budget?             @relation(fields: [budgetId], references: [id])
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+
+  @@index([accountId])
+  @@index([budgetId])
+}
+
+enum TransactionType {
+  INCOME
+  EXPENSE
+  TRANSFER
+}
+
+enum TransactionStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  CANCELLED
+}
+
+enum TransactionCategory {
+  SALARY
+  BUSINESS
+  GIFT
+  RENT
+  UTILITIES
+  GROCERIES
+  DINING
+  TRANSPORTATION
+  HEALTHCARE
+  EDUCATION
+  ENTERTAINMENT
+  SHOPPING
+  SAVINGS
+  INVESTMENT
+  DEBT_PAYMENT
+  OTHER
 }
