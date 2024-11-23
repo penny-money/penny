@@ -1,3 +1,4 @@
+import { Button } from '@repo/design-system/components/ui/button';
 import {
   Card,
   CardContent,
@@ -6,7 +7,6 @@ import {
   CardTitle,
 } from '@repo/design-system/components/ui/card';
 import { Input } from '@repo/design-system/components/ui/input';
-import { Button } from '@repo/design-system/components/ui/button';
 
 export default function Page() {
   return (
