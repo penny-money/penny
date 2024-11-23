@@ -13,28 +13,31 @@ datasource db {
 }
 
 model User {
-  id        String    @id @default(cuid())
-  email     String    @unique
-  name      String
-  accounts  Account[]
-  budgets   Budget[]
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  id        String   @id @default(cuid())
+  clerkId   String   @unique
+  createdAt DateTime @default(now()) @db.Timestamptz()
+  updatedAt DateTime @updatedAt @db.Timestamptz()
+
+  accounts Account[]
+  budgets  Budget[]
 }
 
 model Account {
-  id           String        @id @default(cuid())
-  userId       String
-  name         String
-  type         AccountType
-  balance      Int           @default(0)
-  currency     String
-  isActive     Boolean       @default(true)
+  id            String      @id @default(cuid())
+  userId        String
+  name          String
+  accountNumber String
+  type          AccountType
+  balance       Int         @default(0)
+  currency      String
+  isActive      Boolean     @default(true)
+  createdAt     DateTime    @default(now()) @db.Timestamptz()
+  updatedAt     DateTime    @default(now()) @db.Timestamptz()
+
   transactions Transaction[]
   budgets      Budget[]
-  user         User          @relation(fields: [userId], references: [id])
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
 
   @@index([userId])
 }
@@ -56,21 +59,21 @@ model Budget {
   targetAmount       Int
   assignedAmount     Int            @default(0)
   spentAmount        Int            @default(0)
-  startDate          DateTime
-  endDate            DateTime?
+  startDate          DateTime       @db.Timestamptz()
+  endDate            DateTime?      @db.Timestamptz()
   isRecurring        Boolean        @default(false)
   recurringPeriod    Period?
   recurringFrequency Int?
   recurringDays      Int[]
   recurringWeeks     Int[]
-  nextRecurrence     DateTime?
+  nextRecurrence     DateTime?      @db.Timestamptz()
   category           BudgetCategory
   transactions       Transaction[]
   account            Account?       @relation(fields: [accountId], references: [id])
   accountId          String?
   user               User           @relation(fields: [userId], references: [id])
-  createdAt          DateTime       @default(now())
-  updatedAt          DateTime       @updatedAt
+  createdAt          DateTime       @default(now()) @db.Timestamptz()
+  updatedAt          DateTime       @updatedAt @db.Timestamptz()
 
   @@index([userId])
   @@index([accountId])
@@ -105,13 +108,13 @@ model Transaction {
   amount      Int
   type        TransactionType
   description String
-  date        DateTime
+  date        DateTime            @db.Timestamptz()
   category    TransactionCategory
   status      TransactionStatus   @default(COMPLETED)
   account     Account             @relation(fields: [accountId], references: [id])
   budget      Budget?             @relation(fields: [budgetId], references: [id])
-  createdAt   DateTime            @default(now())
-  updatedAt   DateTime            @updatedAt
+  createdAt   DateTime            @default(now()) @db.Timestamptz()
+  updatedAt   DateTime            @updatedAt @db.Timestamptz()
 
   @@index([accountId])
   @@index([budgetId])

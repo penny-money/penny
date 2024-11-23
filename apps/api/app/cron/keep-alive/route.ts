@@ -3,8 +3,7 @@ import { database } from '@repo/database';
 export const POST = async () => {
   const newUser = await database.user.create({
     data: {
-      name: 'cron tmp',
-      email: 'test@test.com',
+      clerkId: 'random-id',
     },
   });
 
