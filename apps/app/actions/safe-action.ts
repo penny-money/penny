@@ -22,30 +22,45 @@ const baseAction = createSafeActionClient({
 });
 
 /**
- * Ensures actions using this client are authenticated and provides user context
+ * Ensures actions using this client are partialy authenticated by clerk and provides user context with clerkId
  */
-export const authActionClient = baseAction.use(
-  async ({ next, metadata, ctx }) => {
-    const { userId: clerkId } = await auth();
+export const clerkAuthClient = baseAction.use(async ({ next, metadata }) => {
+  const { userId: clerkId } = await auth();
 
-    if (!clerkId) {
-      throw new Error('Unauthorized');
-    }
+  if (!clerkId) {
+    throw new Error('Unauthorized');
+  }
 
+  return withServerActionInstrumentation(metadata.name, async () => {
+    return await next({
+      ctx: {
+        user: {
+          clerkId,
+        },
+      },
+    });
+  });
+});
+
+/**
+ * Ensures actions using this client are fully authenticated by clerk and db and provides full user context
+ */
+export const fullAuthClient = clerkAuthClient.use(
+  async ({ next, ctx, metadata }) => {
     const dbUser = await ctx.db.user.findUnique({
-      where: { clerkId },
+      where: { clerkId: ctx.user.clerkId },
     });
 
     if (!dbUser) {
-      throw new Error('User not found in database');
+      throw new Error('User not found');
     }
 
     return withServerActionInstrumentation(metadata.name, async () => {
       return await next({
         ctx: {
           user: {
-            clerkId,
-            userId: dbUser.id,
+            ...ctx.user,
+            userId: dbUser?.id,
           },
         },
       });
