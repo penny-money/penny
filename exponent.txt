@@ -1,0 +1,30 @@
+# Penny - Personal Finance Platform
+
+## Authentication Flow
+1. Client-side authentication handled by Clerk
+2. Protected routes under `apps/app/(authenticated)/*` 
+3. Layout middleware checks for authenticated user:
+   - Redirects to sign-in if no user
+   - For authenticated users, syncs Clerk user with internal database
+4. User synchronization:
+   - Uses server action `createDbUserAction`
+   - Creates/finds user record using Clerk ID
+   - Handles through safe-action client with additional security measures
+
+## Project Structure
+- Monorepo setup
+- Key packages:
+  - apps/app: Next.js application with App Router
+  - packages/database: Prisma schema and database logic
+  - packages/auth: Authentication utilities
+
+## Key Files
+- `apps/app/app/(authenticated)/layout.tsx`: Main authentication flow
+- `apps/app/actions/users/index.ts`: User management actions
+- `apps/app/actions/safe-action.ts`: Action middleware and security
+- `packages/database/prisma/schema.prisma`: Database schema
+
+## Security Features
+- Uses arcjet for bot protection
+- Safe actions with type safety and validation
+- Server-side authentication checks

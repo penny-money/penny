@@ -1,6 +1,5 @@
 'use server';
 
-import { database } from '@repo/database';
 import { authActionClient } from '../safe-action';
 import { userSchema } from '../schema';
 
@@ -10,6 +9,6 @@ const createDbUserSchema = userSchema.omit({
 
 export const createDbUserAction = authActionClient
   .schema(createDbUserSchema)
-  .action(async ({ parsedInput: data }) => {
-    await database.user.create({ data });
+  .action(async ({ parsedInput: data, ctx }) => {
+    await ctx.db.user.create({ data });
   });

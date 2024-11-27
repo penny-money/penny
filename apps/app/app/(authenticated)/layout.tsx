@@ -5,6 +5,7 @@ import arcjet, { detectBot, request } from '@repo/security';
 import type { ReactNode } from 'react';
 import { PostHogIdentifier } from './components/posthog-identifier';
 import { GlobalSidebar } from './components/sidebar';
+import { createDbUserAction } from '@/actions/users';
 
 type AppLayoutProperties = {
   readonly children: ReactNode;
@@ -13,8 +14,6 @@ type AppLayoutProperties = {
 const aj = arcjet.withRule(
   detectBot({
     mode: 'LIVE',
-    // Allow preview links to show OG images, but no other bots should be
-    // allowed. See https://docs.arcjet.com/bot-protection/identifying-bots
     allow: ['CATEGORY:PREVIEW'],
   })
 );
@@ -23,13 +22,10 @@ const AppLayout = async ({ children }: AppLayoutProperties) => {
   const req = await request();
   const decision = await aj.protect(req);
 
-  // These errors are handled by the global error boundary, but you could also
-  // redirect or show a custom error page
   if (decision.isDenied()) {
     if (decision.reason.isBot()) {
       throw new Error('No bots allowed');
     }
-
     throw new Error('Access denied');
   }
 
@@ -38,7 +34,17 @@ const AppLayout = async ({ children }: AppLayoutProperties) => {
   const betaFeature = await showBetaFeature();
 
   if (!user) {
-    redirectToSignIn();
+    return redirectToSignIn();
+  }
+
+  // Create or sync user with our database
+  try {
+    await createDbUserAction({
+      clerkId: user.id,
+    });
+  } catch (error) {
+    console.error('Failed to sync user with database:', error);
+    // You might want to handle this error differently depending on your requirements
   }
 
   return (

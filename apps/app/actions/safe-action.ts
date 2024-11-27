@@ -22,8 +22,7 @@ const baseAction = createSafeActionClient({
 });
 
 /**
- * Ensures actions using this client are authenticated
- * //TODO:: Create user in DB during sign in/up flow and remove the user creation in this flow
+ * Ensures actions using this client are authenticated and provides user context
  */
 export const authActionClient = baseAction.use(
   async ({ next, metadata, ctx }) => {
@@ -33,18 +32,12 @@ export const authActionClient = baseAction.use(
       throw new Error('Unauthorized');
     }
 
-    let dbUser = await ctx.db.user.findUnique({
-      where: {
-        clerkId,
-      },
+    const dbUser = await ctx.db.user.findUnique({
+      where: { clerkId },
     });
 
     if (!dbUser) {
-      dbUser = await ctx.db.user.create({
-        data: {
-          clerkId,
-        },
-      });
+      throw new Error('User not found in database');
     }
 
     return withServerActionInstrumentation(metadata.name, async () => {
