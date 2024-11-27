@@ -18,10 +18,7 @@ import { useAction } from 'next-safe-action/hooks';
 import { useForm } from 'react-hook-form';
 import type { z } from 'zod';
 
-export function CreateAccountForm() {
-  const title = 'Create new account',
-    description = 'Manually create a new account using this form';
-
+function useCreateAccountForm() {
   const form = useForm<z.infer<typeof createAccountSchema>>({
     resolver: zodResolver(createAccountSchema),
     defaultValues: {
@@ -39,6 +36,19 @@ export function CreateAccountForm() {
   async function onSubmit(values: z.infer<typeof createAccountSchema>) {
     await createAccount.executeAsync(values);
   }
+
+  return {
+    createAccount,
+    form,
+    onSubmit,
+  };
+}
+
+export function CreateAccountForm() {
+  const { createAccount, form, onSubmit } = useCreateAccountForm();
+
+  const title = 'Create new account';
+  const description = 'Manually create a new account using this form';
 
   return (
     <AppSheet title={title} description={description}>
