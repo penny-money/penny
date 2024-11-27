@@ -44,7 +44,6 @@ const AppLayout = async ({ children }: AppLayoutProperties) => {
     });
   } catch (error) {
     console.error('Failed to sync user with database:', error);
-    // You might want to handle this error differently depending on your requirements
   }
 
   return (
