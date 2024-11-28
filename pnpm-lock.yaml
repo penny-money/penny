@@ -615,7 +615,7 @@ importers:
         version: link:../observability
       '@vercel/toolbar':
         specifier: ^0.1.27
-        version: 0.1.27(next@packages+design-system+@vercel+toolbar+next)(react@18.3.1)(vite@5.4.10(@types/node@22.9.1)(terser@5.31.0))
+        version: 0.1.27(next@15.0.3(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(vite@5.4.10(@types/node@22.9.1)(terser@5.31.0))
       class-variance-authority:
         specifier: ^0.7.0
         version: 0.7.0
@@ -633,13 +633,16 @@ importers:
         version: 8.5.1(react@18.3.1)
       geist:
         specifier: ^1.3.1
-        version: 1.3.1(next@packages+design-system+@vercel+toolbar+next)
+        version: 1.3.1(next@15.0.3(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       input-otp:
         specifier: ^1.4.1
         version: 1.4.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      lucide-react:
+        specifier: ^0.460.0
+        version: 0.460.0(react@18.3.1)
       next:
         specifier: link:@vercel/toolbar/next
-        version: link:@vercel/toolbar/next
+        version: 15.0.3(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       next-themes:
         specifier: ^0.4.3
         version: 0.4.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -11151,19 +11154,6 @@ snapshots:
       react: 18.3.1
       vite: 5.4.10(@types/node@22.9.1)(terser@5.31.0)
 
-  '@vercel/toolbar@0.1.27(next@packages+design-system+@vercel+toolbar+next)(react@18.3.1)(vite@5.4.10(@types/node@22.9.1)(terser@5.31.0))':
-    dependencies:
-      '@tinyhttp/app': 1.3.0
-      chokidar: 3.6.0
-      execa: 5.1.1
-      find-up: 5.0.0
-      get-port: 5.1.1
-      strip-ansi: 6.0.1
-    optionalDependencies:
-      next: link:packages/design-system/@vercel/toolbar/next
-      react: 18.3.1
-      vite: 5.4.10(@types/node@22.9.1)(terser@5.31.0)
-
   '@vitejs/plugin-react@4.3.3(vite@5.4.10(@types/node@22.9.1)(terser@5.31.0))':
     dependencies:
       '@babel/core': 7.26.0
@@ -12549,9 +12539,9 @@ snapshots:
 
   fuse.js@7.0.0: {}
 
-  geist@1.3.1(next@packages+design-system+@vercel+toolbar+next):
+  geist@1.3.1(next@15.0.3(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)):
     dependencies:
-      next: link:packages/design-system/@vercel/toolbar/next
+      next: 15.0.3(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
 
   gensync@1.0.0-beta.2: {}
 
