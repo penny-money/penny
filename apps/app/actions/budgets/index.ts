@@ -1,15 +1,15 @@
 'use server';
 
 import { fullAuthClient } from '../safe-action';
-import { createAccountSchema } from '../schema';
+import { createBudgetSchema } from '../schema';
 
-export const createAccountAction = fullAuthClient
+export const createBudgetAction = fullAuthClient
   .metadata({
-    name: 'create-account-action',
+    name: 'create-budget-action',
   })
-  .schema(createAccountSchema)
+  .schema(createBudgetSchema)
   .action(async ({ ctx, parsedInput: data }) => {
-    await ctx.db.account.create({
+    await ctx.db.budget.create({
       data: {
         ...data,
         userId: ctx.user.userId,
