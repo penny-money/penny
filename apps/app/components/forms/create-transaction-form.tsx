@@ -1,11 +1,13 @@
 'use client';
 
+import { Calendar } from '@repo/design-system/components/ui/calendar';
+import { Calendar as CalendarIcon } from 'lucide-react';
 import { createTransactionAction } from '@/actions/transactions';
 import { createTransactionSchema } from '@/actions/schema';
 import { AppSheet } from '@/components/sheet';
-import { DatePicker } from "@repo/design-system";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@repo/design-system/components/ui/button';
+import { format } from 'date-fns';
 import {
   Form,
   FormControl,
@@ -26,6 +28,11 @@ import { useAction } from 'next-safe-action/hooks';
 import { useForm } from 'react-hook-form';
 import type { z } from 'zod';
 import type { Account } from '@repo/database';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@repo/design-system/components/ui/popover';
 
 type CreateTransactionFormProps = {
   accounts: Account[];
@@ -199,14 +206,32 @@ export function CreateTransactionForm({
           <FormField
             name="date"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="">
                 <FormLabel>Date</FormLabel>
-                <FormControl>
-                  <DatePicker
-                    date={field.value ? new Date(field.value) : undefined}
-                    onSelect={(date) => field.onChange(date?.toISOString())}
-                  />
-                </FormControl>
+                <div>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <FormControl>
+                        <Button fullWidth variant="outline">
+                          {field.value ? (
+                            format(field.value, 'PPP')
+                          ) : (
+                            <span>Pick a date</span>
+                          )}
+                          <CalendarIcon />
+                        </Button>
+                      </FormControl>
+                    </PopoverTrigger>
+                    <PopoverContent>
+                      <Calendar
+                        mode="single"
+                        selected={field.value}
+                        onSelect={field.onChange}
+                        initialFocus
+                      />
+                    </PopoverContent>
+                  </Popover>
+                </div>
                 <FormMessage />
               </FormItem>
             )}
