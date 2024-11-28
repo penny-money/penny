@@ -33,3 +33,32 @@ export const createAccountSchema = accountSchema.omit({
   id: true,
   userId: true,
 });
+
+export const createTransactionSchema = z.object({
+  accountId: z.string().min(1, 'Account is required'),
+  amount: z.number().min(0, 'Amount must be positive'),
+  type: z.enum(['INCOME', 'EXPENSE', 'TRANSFER']),
+  description: z.string().min(1, 'Description is required'),
+  date: z.date(),
+  category: z.enum([
+    'SALARY',
+    'BUSINESS',
+    'GIFT',
+    'RENT',
+    'UTILITIES',
+    'GROCERIES',
+    'DINING',
+    'TRANSPORTATION',
+    'HEALTHCARE',
+    'EDUCATION',
+    'ENTERTAINMENT',
+    'SHOPPING',
+    'SAVINGS',
+    'INVESTMENT',
+    'DEBT_PAYMENT',
+    'OTHER',
+  ]),
+  status: z
+    .enum(['PENDING', 'COMPLETED', 'FAILED', 'CANCELLED'])
+    .default('PENDING'),
+});
