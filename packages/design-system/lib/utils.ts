@@ -4,6 +4,8 @@ import type { ClassValue } from 'clsx';
 import { toast } from 'sonner';
 import { twMerge } from 'tailwind-merge';
 
+export * from 'class-variance-authority';
+
 export const cn = (...inputs: ClassValue[]): string => twMerge(clsx(inputs));
 
 export const capitalize = (str: string) =>

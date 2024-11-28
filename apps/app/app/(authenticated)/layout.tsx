@@ -19,15 +19,15 @@ const aj = arcjet.withRule(
 );
 
 const AppLayout = async ({ children }: AppLayoutProperties) => {
-  const req = await request();
-  const decision = await aj.protect(req);
-
-  if (decision.isDenied()) {
-    if (decision.reason.isBot()) {
-      throw new Error('No bots allowed');
-    }
-    throw new Error('Access denied');
-  }
+  // const req = await request();
+  // const decision = await aj.protect(req);
+  //
+  // if (decision.isDenied()) {
+  //   if (decision.reason.isBot()) {
+  //     throw new Error('No bots allowed');
+  //   }
+  //   throw new Error('Access denied');
+  // }
 
   const user = await currentUser();
   const { redirectToSignIn } = await auth();
@@ -42,8 +42,8 @@ const AppLayout = async ({ children }: AppLayoutProperties) => {
     await createDbUserAction({
       clerkId: user.id,
     });
-  } catch (error) {
-    console.error('Failed to sync user with database:', error);
+  } catch {
+    // console.error('Failed to sync user with database:', error);
   }
 
   return (
