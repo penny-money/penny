@@ -1,4 +1,5 @@
 import typography from '@tailwindcss/typography';
+import container from '@tailwindcss/container-queries';
 import type { Config } from 'tailwindcss';
 import animate from 'tailwindcss-animate';
 import defaultTheme from 'tailwindcss/defaultTheme';
@@ -102,5 +103,5 @@ export const config: Config = {
       typography: typographyConfig,
     },
   },
-  plugins: [animate, typography],
+  plugins: [animate, container, typography],
 };

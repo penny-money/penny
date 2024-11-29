@@ -155,7 +155,7 @@ export const GlobalSidebar = ({ children }: GlobalSidebarProperties) => {
           </SidebarMenu>
         </SidebarFooter>
       </Sidebar>
-      <SidebarInset className="@container">{children}</SidebarInset>
+      <SidebarInset className="@container/main">{children}</SidebarInset>
     </>
   );
 };
