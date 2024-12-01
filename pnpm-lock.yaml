@@ -203,12 +203,6 @@ importers:
         specifier: ^2.1.6
         version: 2.1.6(@types/node@22.10.1)(jsdom@25.0.1(bufferutil@4.0.8))(terser@5.31.0)
 
-  apps/docs:
-    devDependencies:
-      typescript:
-        specifier: ^5.7.2
-        version: 5.7.2
-
   apps/email:
     dependencies:
       '@react-email/components':
@@ -370,8 +364,8 @@ importers:
         specifier: ^1.4.1
         version: 1.4.1(next@15.0.3(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
       posthog-js:
-        specifier: ^1.191.0
-        version: 1.191.0
+        specifier: ^1.194.1
+        version: 1.194.1
       posthog-node:
         specifier: ^4.3.1
         version: 4.3.1
@@ -6494,8 +6488,8 @@ packages:
   postgres-range@1.1.4:
     resolution: {integrity: sha512-i/hbxIE9803Alj/6ytL7UHQxRvZkI9O4Sy+J3HGc4F4oo/2eQAjTSNJ0bfxyse3bH0nuVesCk+3IRLaMtG3H6w==}
 
-  posthog-js@1.191.0:
-    resolution: {integrity: sha512-RSyqE9GRb6nqJa/DurtdXSlpDi15RUDAyDh13n2CvaiI5Ij7eIs5gEmfqJZchVZgJhtiOCZ5l6/zAq2NxKqbrg==}
+  posthog-js@1.194.1:
+    resolution: {integrity: sha512-d68hmU9DY4iPe3WneBlnglERhimRhXuF7Lx0Au6OTmOL+IFdFUxB3Qf5LaLqJc1QLt3NUolMq1HiXOaIULe3kQ==}
 
   posthog-node@4.3.1:
     resolution: {integrity: sha512-By9SEGZxBLC7GVyVb+HlJlpxM/xI4iLUgwtsBS8f4bZ0wqYKiNHoYcFEwMJnTM9xQcQZztr6dqLmsJ7jCv0vxA==}
@@ -14121,7 +14115,7 @@ snapshots:
 
   postgres-range@1.1.4: {}
 
-  posthog-js@1.191.0:
+  posthog-js@1.194.1:
     dependencies:
       core-js: 3.38.1
       fflate: 0.4.8
