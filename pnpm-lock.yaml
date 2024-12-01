@@ -69,8 +69,8 @@ importers:
         specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
       svix:
-        specifier: ^1.41.0
-        version: 1.41.0
+        specifier: ^1.42.0
+        version: 1.42.0
     devDependencies:
       '@repo/typescript-config':
         specifier: workspace:*
@@ -202,12 +202,6 @@ importers:
       vitest:
         specifier: ^2.1.6
         version: 2.1.6(@types/node@22.10.1)(jsdom@25.0.1(bufferutil@4.0.8))(terser@5.31.0)
-
-  apps/docs:
-    devDependencies:
-      typescript:
-        specifier: ^5.7.2
-        version: 5.7.2
 
   apps/email:
     dependencies:
@@ -910,8 +904,8 @@ importers:
         specifier: workspace:*
         version: link:../env
       svix:
-        specifier: ^1.41.0
-        version: 1.41.0
+        specifier: ^1.42.0
+        version: 1.42.0
     devDependencies:
       '@repo/typescript-config':
         specifier: workspace:*
@@ -7203,8 +7197,8 @@ packages:
   svix-fetch@3.0.0:
     resolution: {integrity: sha512-rcADxEFhSqHbraZIsjyZNh4TF6V+koloX1OzZ+AQuObX9mZ2LIMhm1buZeuc5BIZPftZpJCMBsSiBaeszo9tRw==}
 
-  svix@1.41.0:
-    resolution: {integrity: sha512-RuRdhM4Kb5ZUwq/VBpsQlH7u0GMgWFr6Tk+21x4uS15pDsGeJjkmOVWQtLcYE8iI332csZ/KX4zJ44pMjJLBQQ==}
+  svix@1.42.0:
+    resolution: {integrity: sha512-y8WOsSoTfUpnJj+1UJ0l0o4Klsqo3m9EheaXHCtDcKeSh3gmbOabrdXDGy+cz046Y59un3ozQTZF3KpKZeosWQ==}
 
   swr@2.2.5:
     resolution: {integrity: sha512-QtxqyclFeAsxEUeZIYmsaQ0UjimSq1RZ9Un7I68/0ClKK/U3LoyQunwkQfJZr2fc22DfIXLNDc2wFyTEikCUpg==}
@@ -15101,7 +15095,7 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  svix@1.41.0:
+  svix@1.42.0:
     dependencies:
       '@stablelib/base64': 1.0.1
       '@types/node': 22.10.1
