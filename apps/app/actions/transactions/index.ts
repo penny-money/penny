@@ -10,7 +10,10 @@ export const createTransactionAction = fullAuthClient
   .schema(createTransactionSchema)
   .action(async ({ parsedInput: data, ctx }) => {
     const transaction = await ctx.db.transaction.create({
-      data,
+      data: {
+        ...data,
+        updatedAt: new Date(),
+      },
       include: {
         account: true,
       },
@@ -18,8 +21,7 @@ export const createTransactionAction = fullAuthClient
 
     // Update account balance based on transaction type
     const balanceChange = data.type === 'EXPENSE' ? -data.amount : data.amount;
-
-    await ctx.db.account.update({
+    const account = await ctx.db.account.update({
       where: {
         id: data.accountId,
       },
@@ -27,9 +29,22 @@ export const createTransactionAction = fullAuthClient
         balance: {
           increment: balanceChange,
         },
+        updatedAt: new Date(),
+      },
+      select: {
+        id: true,
+        balance: true,
+      },
+    });
+
+    // Add a balance snapshot on transaciton creation
+    await ctx.db.balanceSnapshots.create({
+      data: {
+        balance: account.balance,
+        accountId: account.id,
+        snapshotDate: new Date(),
       },
     });
 
     return transaction;
   });
-

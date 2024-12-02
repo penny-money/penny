@@ -13,7 +13,7 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(cuid())
+  id        String   @id @default(cuid(2))
   clerkId   String   @unique
   createdAt DateTime @default(now()) @db.Timestamptz()
   updatedAt DateTime @updatedAt @db.Timestamptz()
@@ -23,7 +23,7 @@ model User {
 }
 
 model Account {
-  id            String      @id @default(cuid())
+  id            String      @id @default(cuid(2))
   userId        String
   name          String
   accountNumber String
@@ -37,9 +37,21 @@ model Account {
   transactions Transaction[]
   budgets      Budget[]
 
-  user User @relation(fields: [userId], references: [id])
+  user             User               @relation(fields: [userId], references: [id])
+  BalanceSnapshots BalanceSnapshots[]
 
   @@index([userId])
+}
+
+model BalanceSnapshots {
+  id           String   @id @default(cuid(2))
+  accountId    String
+  balance      Int
+  snapshotDate DateTime @default(now()) @db.Timestamptz()
+
+  account Account @relation(fields: [accountId], references: [id])
+
+  @@index([accountId])
 }
 
 enum AccountType {
@@ -52,7 +64,7 @@ enum AccountType {
 }
 
 model Budget {
-  id                 String         @id @default(cuid())
+  id                 String         @id @default(cuid(2))
   userId             String
   name               String
   description        String?
@@ -102,7 +114,7 @@ enum BudgetCategory {
 }
 
 model Transaction {
-  id          String              @id @default(cuid())
+  id          String              @id @default(cuid(2))
   accountId   String
   budgetId    String?
   amount      Int

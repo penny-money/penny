@@ -50,17 +50,17 @@ export const AccountSummaryCard: FC<AccountSummaryCardProps> = (props) => {
         </CardDescription>
       </CardHeader>
       <CardContent className="p-4 pt-0">
-        <div className="space-y-0.5">
-          <div className="font-bold font-mono">
+        <div className="space-y-px">
+          <div className="font-bold text-xl">
             {formatAmount(props.currentAmount, props.currency)}
           </div>
-          {isPositive ? (
-            <ArrowUpRight className="size-4" />
-          ) : (
-            <ArrowDownRight className="size-4" />
-          )}
-          <div className={cn('flex gap-1 text-ellipsis text-xs')}>
-            vs {formatAmount(props.previousAmount ?? 0, props.currency)} last
+          <div className={cn('flex gap-1 text-ellipsis text-sm')}>
+            {isPositive ? (
+              <ArrowUpRight className="size-4" />
+            ) : (
+              <ArrowDownRight className="size-4" />
+            )}
+            {formatAmount(props.previousAmount ?? 0, props.currency)} last
             period
           </div>
         </div>

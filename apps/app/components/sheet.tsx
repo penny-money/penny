@@ -1,3 +1,4 @@
+import { Button } from '@repo/design-system/components/ui/button';
 import {
   Sheet,
   SheetContent,
@@ -21,8 +22,10 @@ export const AppSheet: FC<PropsWithChildren<AppSheetProps>> = ({
 }) => {
   return (
     <Sheet>
-      <SheetTrigger>
-        <Plus />
+      <SheetTrigger asChild>
+        <Button size="icon">
+          <Plus />
+        </Button>
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>

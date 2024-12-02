@@ -29,35 +29,32 @@ export const AccountCard: FC<AccountCardProps> = (props) => {
   return (
     <Card className="rounded-none shadow-none">
       <CardHeader className="p-4">
-        <CardTitle className="flex items-center justify-between">
-          <span>{props.name}</span>
-        </CardTitle>
+        <CardTitle className="">{props.name}</CardTitle>
         <CardDescription>
           <span className="sr-only">{props.description}</span>
-          <div className="mt-1 text-muted-foreground text-xs">
+          <div className="text-muted-foreground">
             {`${props.institution} • ${props.accountNumber
               .slice(-4)
               .padStart(props.accountNumber.length, '*')}`}
-            {}
           </div>
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-4 p-4 pt-0">
-        <div className="flex flex-col gap-1">
-          <div className="flex items-center gap-1 text-xs">
+          <div className="flex items-center gap-1 text-sm">
             <div
               className="size-3"
               style={{ backgroundColor: props.labelColor }}
             />
-            <div className="text-neutral-400">{props.category}</div>
+            <div className="text-neutral-500">{props.category}</div>
           </div>
-          <div className="font-bold font-mono text-neutral-600 text-xl">
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-4 p-4 pt-0">
+        <div className="">
+          <div className="font-semibold text-lg text-neutral-600">
             {formatAmount(props.currentAmount, props.currency)}
           </div>
 
           <div
             className={cn(
-              'flex gap-1 truncate text-nowrap text-xs',
+              'flex items-center gap-1 truncate text-nowrap text-sm',
               isPositive ? 'text-green-600' : 'text-red-600'
             )}
           >
@@ -66,7 +63,7 @@ export const AccountCard: FC<AccountCardProps> = (props) => {
             ) : (
               <ArrowDownRight className="size-4" />
             )}
-            vs {formatAmount(props.previousAmount, props.currency)} last period
+            {formatAmount(props.previousAmount, props.currency)} last period
           </div>
         </div>
       </CardContent>

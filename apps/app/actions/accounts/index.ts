@@ -10,10 +10,23 @@ export const createAccountAction = fullAuthClient
   })
   .schema(createAccountSchema)
   .action(async ({ ctx, parsedInput: data }) => {
-    await database.account.create({
+    const account = await database.account.create({
       data: {
         ...data,
         userId: ctx.user.userId,
+      },
+      select: {
+        id: true,
+        balance: true,
+      },
+    });
+
+    // Create a balance snapshot on account creation
+    await database.balanceSnapshots.create({
+      data: {
+        accountId: account.id,
+        balance: account.balance,
+        snapshotDate: new Date(),
       },
     });
   });
