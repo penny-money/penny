@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
-    "@prisma/client": "6.0.0",
+    "@prisma/client": "6.0.1",
     "@repo/analytics": "workspace:*",
     "@repo/auth": "workspace:*",
     "@repo/database": "workspace:*",
@@ -22,12 +22,12 @@
     "@repo/seo": "workspace:*",
     "@repo/tailwind-config": "workspace:*",
     "@repo/webhooks": "workspace:*",
-    "@sentry/nextjs": "^8.41.0",
+    "@sentry/nextjs": "^8.42.0",
     "@tanstack/react-table": "^8.20.5",
     "date-fns": "^4.1.0",
     "fuse.js": "^7.0.0",
     "import-in-the-middle": "^1.11.2",
-    "lucide-react": "^0.462.0",
+    "lucide-react": "^0.463.0",
     "next": "15.0.3",
     "next-safe-action": "^7.9.9",
     "next-themes": "^0.4.3",
@@ -47,6 +47,6 @@
     "@types/react-dom": "18.3.1",
     "jsdom": "^25.0.1",
     "typescript": "^5.7.2",
-    "vitest": "^2.1.6"
+    "vitest": "^2.1.8"
   }
 }

@@ -3,15 +3,15 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "@clerk/nextjs": "^6.5.1",
-    "@clerk/themes": "^2.1.48",
+    "@clerk/nextjs": "^6.5.2",
+    "@clerk/themes": "^2.1.49",
     "@repo/tailwind-config": "workspace:*",
     "next-themes": "^0.4.3",
     "react": "^18.3.1",
     "server-only": "^0.0.1"
   },
   "devDependencies": {
-    "@clerk/types": "^4.35.0",
+    "@clerk/types": "^4.35.1",
     "@repo/typescript-config": "workspace:*",
     "@types/node": "22.10.1",
     "@types/react": "18.3.12",
