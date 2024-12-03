@@ -24,12 +24,17 @@ async function getAccounts() {
 
 export default async function TransactionsPage() {
   const accounts = await getAccounts();
+  const transactions = await database.transaction.findMany();
 
   return (
     <div className="h-full p-6">
       <TransactionsPageTopBar>
         <CreateTransactionForm accounts={accounts} />
       </TransactionsPageTopBar>
+      <div className="font-bold font-mono text-2xl">{transactions.length}</div>
+      <pre>
+        <code>{JSON.stringify(transactions, null, 2)}</code>
+      </pre>
     </div>
   );
 }

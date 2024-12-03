@@ -19,3 +19,21 @@
   - [ ] Currency to view the summaries
   - [ ] Filtered account types
   - [ ] Filtered time range
+
+  ## Account Views
+
+  - [x] Table view for accounts
+    - [x] Badge for active account
+    - [x] Show active accounts only by default
+    - [x] Pad account number by default with option to reveal the full account number
+    - [x] Hide the currency field by default
+  - [ ] Filters
+    - [ ] Filter by account type
+    - [ ] Filter to include inactive accounts
+    - [ ] Hook up page-level filters to the table
+  - [ ] Currency
+    - [ ] Show and convert values using user's default currency.
+    - [ ] Show amounts using the account's default currency.
+  - [ ] Add financial institution field in the Account model
+    - [ ] Add it to the form
+    - [ ] Add it to the table view

@@ -3,10 +3,14 @@ import { AccountSummaryCard } from '@/components/cards/account-summary-cards';
 import { database as db } from '@repo/database';
 import { CreateAccountForm } from '@/components/forms/create-account-form';
 import { Suspense } from 'react';
+import { DataTable } from '@/components/tables/data-table';
+import { accountColumns } from '@/components/tables/columns/accounts';
 
 export const dynamic = 'force-dynamic';
 
-export default function AccountsPage() {
+export default async function AccountsPage() {
+  const accounts = await getAccounts();
+
   return (
     <div className="@container h-full space-y-6 border-b p-4">
       <div className="flex w-full items-center justify-end">
@@ -38,20 +42,14 @@ export default function AccountsPage() {
       </div>
       <div className="space-y-2">
         <h2 className="text-neutral-500 text-sm">All accounts.</h2>
-        <div className="flex flex-wrap gap-2">
-          <div className="grow">
-            <AccountCard {...singleAccount} />
-          </div>
-          <div className="grow">
-            <AccountCard {...singleAccount} />
-          </div>
-          <div className="grow">
-            <AccountCard {...singleAccount} />
-          </div>
-        </div>
+        <DataTable columns={accountColumns} data={accounts} />
       </div>
     </div>
   );
+}
+
+async function getAccounts() {
+  return await db.account.findMany();
 }
 
 async function BalanceSummary() {
