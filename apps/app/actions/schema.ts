@@ -10,15 +10,15 @@ const type = [
 ] as const;
 
 export const userSchema = z.object({
-  id: z.string().cuid(),
+  id: z.union([z.string().cuid(), z.string().cuid2()]),
   clerkId: z.string(),
   createdAt: z.date().default(new Date()),
   updatedAt: z.date().default(new Date()),
 });
 
 export const accountSchema = z.object({
-  id: z.string().cuid(),
-  userId: z.string().cuid(),
+  id: z.union([z.string().cuid(), z.string().cuid2()]),
+  userId: z.union([z.string().cuid(), z.string().cuid2()]),
   name: z.string().min(3),
   accountNumber: z.string().min(1),
   type: z.enum(type).default('CASH'),
@@ -32,6 +32,10 @@ export const accountSchema = z.object({
 export const createAccountSchema = accountSchema.omit({
   id: true,
   userId: true,
+});
+
+export const deleteAccountSchema = accountSchema.pick({
+  id: true,
 });
 
 export const createTransactionSchema = z.object({

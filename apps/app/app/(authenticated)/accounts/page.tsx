@@ -1,4 +1,3 @@
-import { AccountCard } from '@/components/cards/account-card';
 import { AccountSummaryCard } from '@/components/cards/account-summary-cards';
 import { database as db } from '@repo/database';
 import { CreateAccountForm } from '@/components/forms/create-account-form';
@@ -49,7 +48,9 @@ export default async function AccountsPage() {
 }
 
 async function getAccounts() {
-  return await db.account.findMany();
+  return await db.account.findMany({
+    orderBy: [{ updatedAt: 'desc' }],
+  });
 }
 
 async function BalanceSummary() {
@@ -74,6 +75,9 @@ const getBalanceSummary = async () => {
     _sum: {
       balance: true,
     },
+    where: {
+      isActive: true,
+    },
   });
 
   return {
@@ -93,6 +97,9 @@ const getIncomeSummary = async () => {
     where: {
       type: {
         in: ['INCOME'],
+      },
+      account: {
+        isActive: true,
       },
     },
   });
@@ -115,6 +122,9 @@ const getExpenseSummary = async () => {
       type: {
         in: ['EXPENSE'],
       },
+      account: {
+        isActive: true,
+      },
     },
   });
 
@@ -133,16 +143,4 @@ const fallbackSummary = {
   currency: 'KES', // TODO: User's default currency
   currentAmount: 0,
   previousAmount: 0,
-};
-
-const singleAccount = {
-  name: 'MPESA: Line 1',
-  description: 'My first MPESA line',
-  currency: 'KES',
-  currentAmount: 50000,
-  previousAmount: 4000,
-  institution: 'MPESA',
-  accountNumber: '0703324573',
-  labelColor: 'blue',
-  category: 'Mobile Money',
 };

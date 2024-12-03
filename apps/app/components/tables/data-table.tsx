@@ -2,7 +2,7 @@
 
 import {
   type ColumnDef,
-  ColumnFiltersState,
+  type ColumnFiltersState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,

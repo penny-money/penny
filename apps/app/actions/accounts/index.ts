@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 import { fullAuthClient } from '../safe-action';
-import { createAccountSchema } from '../schema';
+import { createAccountSchema, deleteAccountSchema } from '../schema';
 
 export const createAccountAction = fullAuthClient
   .metadata({
@@ -27,6 +27,24 @@ export const createAccountAction = fullAuthClient
         accountId: account.id,
         balance: account.balance,
         snapshotDate: new Date(),
+      },
+    });
+
+    revalidatePath('/accounts');
+  });
+
+export const deleteAccountAction = fullAuthClient
+  .metadata({
+    name: 'delete-account-action',
+  })
+  .schema(deleteAccountSchema)
+  .action(async ({ ctx, parsedInput: { id } }) => {
+    await ctx.db.account.update({
+      data: {
+        isActive: false,
+      },
+      where: {
+        id,
       },
     });
 

@@ -1,5 +1,7 @@
 import { auth } from '@repo/auth/server';
 import { database } from '@repo/database';
+import { handleError } from '@repo/design-system/lib/utils';
+import { log } from '@repo/observability/log';
 import { withServerActionInstrumentation } from '@sentry/nextjs';
 import { createSafeActionClient } from 'next-safe-action';
 import { z } from 'zod';
@@ -12,6 +14,11 @@ const baseAction = createSafeActionClient({
     return z.object({
       name: z.string(),
     });
+  },
+  throwValidationErrors: true,
+  handleServerError: (e) => {
+    log.error(JSON.stringify(e, null, 2));
+    handleError(e);
   },
 }).use(async ({ next }) => {
   return await next({
