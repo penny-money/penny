@@ -36,7 +36,7 @@ export const createAccountSchema = accountSchema.omit({
 
 export const createTransactionSchema = z.object({
   accountId: z.string().min(1, 'Account is required'),
-  amount: z.number().min(0, 'Amount must be positive'),
+  amount: z.coerce.number().min(0, 'Amount must be positive'),
   type: z.enum(['INCOME', 'EXPENSE', 'TRANSFER']),
   description: z.string().min(1, 'Description is required'),
   date: z.date(),

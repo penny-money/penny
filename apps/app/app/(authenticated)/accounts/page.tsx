@@ -4,17 +4,7 @@ import { database as db } from '@repo/database';
 import { CreateAccountForm } from '@/components/forms/create-account-form';
 import { Suspense } from 'react';
 
-const singleAccount = {
-  name: 'MPESA: Line 1',
-  description: 'My first MPESA line',
-  currency: 'KES',
-  currentAmount: 50000,
-  previousAmount: 4000,
-  institution: 'MPESA',
-  accountNumber: '0703324573',
-  labelColor: 'blue',
-  category: 'Mobile Money',
-};
+export const dynamic = 'force-dynamic';
 
 export default function AccountsPage() {
   return (
@@ -145,4 +135,16 @@ const fallbackSummary = {
   currency: 'KES', // TODO: User's default currency
   currentAmount: 0,
   previousAmount: 0,
+};
+
+const singleAccount = {
+  name: 'MPESA: Line 1',
+  description: 'My first MPESA line',
+  currency: 'KES',
+  currentAmount: 50000,
+  previousAmount: 4000,
+  institution: 'MPESA',
+  accountNumber: '0703324573',
+  labelColor: 'blue',
+  category: 'Mobile Money',
 };

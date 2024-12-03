@@ -1,5 +1,6 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
 import { fullAuthClient } from '../safe-action';
 import { createTransactionSchema } from '../schema';
 
@@ -45,6 +46,8 @@ export const createTransactionAction = fullAuthClient
         snapshotDate: new Date(),
       },
     });
+
+    revalidatePath('/transactons');
 
     return transaction;
   });

@@ -1,6 +1,6 @@
 'use server';
 
-import { database } from '@repo/database';
+import { revalidatePath } from 'next/cache';
 import { fullAuthClient } from '../safe-action';
 import { createAccountSchema } from '../schema';
 
@@ -10,7 +10,7 @@ export const createAccountAction = fullAuthClient
   })
   .schema(createAccountSchema)
   .action(async ({ ctx, parsedInput: data }) => {
-    const account = await database.account.create({
+    const account = await ctx.db.account.create({
       data: {
         ...data,
         userId: ctx.user.userId,
@@ -22,11 +22,13 @@ export const createAccountAction = fullAuthClient
     });
 
     // Create a balance snapshot on account creation
-    await database.balanceSnapshots.create({
+    await ctx.db.balanceSnapshots.create({
       data: {
         accountId: account.id,
         balance: account.balance,
         snapshotDate: new Date(),
       },
     });
+
+    revalidatePath('/accounts');
   });

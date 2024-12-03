@@ -15,10 +15,13 @@ import {
 } from '@repo/design-system/components/ui/form';
 import { Input } from '@repo/design-system/components/ui/input';
 import { useAction } from 'next-safe-action/hooks';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import type { z } from 'zod';
 
 function useCreateAccountForm() {
+  const [open, setOpen] = useState(false);
+
   const form = useForm<z.infer<typeof createAccountSchema>>({
     resolver: zodResolver(createAccountSchema),
     defaultValues: {
@@ -34,24 +37,40 @@ function useCreateAccountForm() {
   const createAccount = useAction(createAccountAction);
 
   async function onSubmit(values: z.infer<typeof createAccountSchema>) {
-    await createAccount.executeAsync(values);
+    try {
+      await createAccount.executeAsync(values);
+      form.reset();
+      setOpen(false);
+    } catch {
+      form.setError('root', {
+        message: 'Something went wrong. Please try again.',
+      });
+    }
   }
 
   return {
     createAccount,
     form,
+    open,
     onSubmit,
+    setOpen,
   };
 }
 
 export function CreateAccountForm() {
-  const { createAccount, form, onSubmit } = useCreateAccountForm();
+  const { createAccount, form, open, onSubmit, setOpen } =
+    useCreateAccountForm();
 
   const title = 'Create new account';
   const description = 'Manually create a new account using this form';
 
   return (
-    <AppSheet title={title} description={description}>
+    <AppSheet
+      open={open}
+      setOpen={setOpen}
+      title={title}
+      description={description}
+    >
       <Form {...form}>
         <form
           className="flex flex-col gap-4"

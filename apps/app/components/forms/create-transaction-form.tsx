@@ -33,12 +33,14 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@repo/design-system/components/ui/popover';
+import { useState } from 'react';
 
 type CreateTransactionFormProps = {
   accounts: Account[];
 };
 
 function useCreateTransactionForm() {
+  const [open, setOpen] = useState(false);
   const form = useForm<z.infer<typeof createTransactionSchema>>({
     resolver: zodResolver(createTransactionSchema),
     defaultValues: {
@@ -55,26 +57,42 @@ function useCreateTransactionForm() {
   const createTransaction = useAction(createTransactionAction);
 
   async function onSubmit(values: z.infer<typeof createTransactionSchema>) {
-    await createTransaction.executeAsync(values);
+    try {
+      await createTransaction.executeAsync(values);
+      form.reset();
+      setOpen(false);
+    } catch {
+      form.setError('root', {
+        message: 'Something went wrong. Please try again.',
+      });
+    }
   }
 
   return {
     createTransaction,
     form,
+    open,
     onSubmit,
+    setOpen,
   };
 }
 
 export function CreateTransactionForm({
   accounts,
 }: CreateTransactionFormProps) {
-  const { createTransaction, form, onSubmit } = useCreateTransactionForm();
+  const { createTransaction, form, open, onSubmit, setOpen } =
+    useCreateTransactionForm();
 
   const title = 'Create new transaction';
   const description = 'Record a new transaction in your account';
 
   return (
-    <AppSheet title={title} description={description}>
+    <AppSheet
+      open={open}
+      setOpen={setOpen}
+      title={title}
+      description={description}
+    >
       <Form {...form}>
         <form
           className="flex flex-col gap-4"
@@ -138,12 +156,7 @@ export function CreateTransactionForm({
               <FormItem>
                 <FormLabel>Amount</FormLabel>
                 <FormControl>
-                  <Input
-                    type="number"
-                    step="0.01"
-                    {...field}
-                    onChange={(e) => field.onChange(e.target.valueAsNumber)}
-                  />
+                  <Input type="number" step="0.01" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
