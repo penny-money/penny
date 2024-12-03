@@ -1,5 +1,5 @@
-import typography from '@tailwindcss/typography';
 import container from '@tailwindcss/container-queries';
+import typography from '@tailwindcss/typography';
 import type { Config } from 'tailwindcss';
 import animate from 'tailwindcss-animate';
 import defaultTheme from 'tailwindcss/defaultTheme';

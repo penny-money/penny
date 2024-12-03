@@ -2,12 +2,8 @@
 
 import {
   type ColumnDef,
-  type ColumnFiltersState,
   flexRender,
-  getCoreRowModel,
-  getFilteredRowModel,
-  useReactTable,
-  type VisibilityState,
+  type useReactTable,
 } from '@tanstack/react-table';
 
 import {
@@ -18,36 +14,13 @@ import {
   TableHeader,
   TableRow,
 } from '@repo/design-system/components/ui/table';
-import { useState } from 'react';
 
 interface DataTableProps<D, V> {
   columns: ColumnDef<D, V>[];
-  data: D[];
+  table: ReturnType<typeof useReactTable<D>>;
 }
 
-export function DataTable<D, V>({ columns, data }: DataTableProps<D, V>) {
-  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({
-    currency: false,
-    isActive: false,
-    type: false,
-  });
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([
-    { id: 'isActive', value: true },
-  ]);
-
-  const table = useReactTable({
-    columns,
-    data,
-    state: {
-      columnFilters,
-      columnVisibility,
-    },
-    getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    onColumnFiltersChange: setColumnFilters,
-    onColumnVisibilityChange: setColumnVisibility,
-  });
-
+export function DataTable<D, V>({ columns, table }: DataTableProps<D, V>) {
   return (
     <div className="border">
       <Table>

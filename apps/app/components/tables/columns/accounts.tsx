@@ -1,10 +1,9 @@
 'use client';
 
-import type { ColumnDef } from '@tanstack/react-table';
+import { deleteAccountAction } from '@/actions/accounts';
 import type { accountSchema } from '@/actions/schema';
 import { Badge } from '@repo/design-system/components/ui/badge';
-import { cn } from '@repo/design-system/lib/utils';
-import { formatDistance } from 'date-fns';
+import { Button } from '@repo/design-system/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,12 +11,27 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from '@repo/design-system/components/ui/dropdown-menu';
-import { Button } from '@repo/design-system/components/ui/button';
-import { Loader, MoreHorizontal } from 'lucide-react';
-import { deleteAccountAction } from '@/actions/accounts';
-import { useAction } from 'next-safe-action/hooks';
+import { cn } from '@repo/design-system/lib/utils';
 import { handleError } from '@repo/design-system/lib/utils';
+import type { ColumnDef } from '@tanstack/react-table';
+import { formatDistance } from 'date-fns';
+import { Loader, MoreHorizontal } from 'lucide-react';
+import { useAction } from 'next-safe-action/hooks';
 import { type MouseEventHandler, useState } from 'react';
+
+export const accountColumnIdToHeaderTextMap = {
+  name: 'Account name',
+  accountNumber: 'Account Number',
+  currency: 'Currency',
+  balance: 'Balance',
+  isActive: 'Status',
+  type: 'Account Type',
+  updatedAt: 'Last Update',
+  actions: 'Actions',
+};
+
+// biome-ignore lint/style/useNamingConvention: <Consecutive ID is okay>
+export type AccountColumnsID = keyof typeof accountColumnIdToHeaderTextMap;
 
 export const accountColumns: ColumnDef<typeof accountSchema._type>[] = [
   {
@@ -28,7 +42,7 @@ export const accountColumns: ColumnDef<typeof accountSchema._type>[] = [
   {
     id: 'accountNumber',
     accessorKey: 'accountNumber',
-    header: 'Account Number',
+    header: accountColumnIdToHeaderTextMap.accountNumber,
     cell: ({ row }) => {
       const accountNumber = row.getValue('accountNumber') as string;
 
@@ -38,12 +52,14 @@ export const accountColumns: ColumnDef<typeof accountSchema._type>[] = [
   {
     id: 'currency',
     accessorKey: 'currency',
-    header: 'Currency',
+    header: accountColumnIdToHeaderTextMap.currency,
   },
   {
     id: 'balance',
     accessorKey: 'balance',
-    header: () => <div className="text-right">Balance</div>,
+    header: () => (
+      <div className="text-right">{accountColumnIdToHeaderTextMap.balance}</div>
+    ),
     cell: ({ row }) => {
       const balance = Number.parseFloat(row.getValue('balance'));
       const formatted = new Intl.NumberFormat('en-US', {
@@ -57,7 +73,7 @@ export const accountColumns: ColumnDef<typeof accountSchema._type>[] = [
   {
     id: 'isActive',
     accessorKey: 'isActive',
-    header: 'Status',
+    header: accountColumnIdToHeaderTextMap.isActive,
     cell: ({ row }) => {
       const isActive = row.getValue('isActive') as boolean;
 
@@ -74,12 +90,12 @@ export const accountColumns: ColumnDef<typeof accountSchema._type>[] = [
   {
     id: 'type',
     accessorKey: 'type',
-    header: 'Account Type',
+    header: accountColumnIdToHeaderTextMap.type,
   },
   {
     id: 'updatedAt',
     accessorKey: 'updatedAt',
-    header: 'Last Update',
+    header: accountColumnIdToHeaderTextMap.updatedAt,
     cell: ({ row }) => {
       const updatedAt = row.getValue('updatedAt') as Date;
 
@@ -90,6 +106,8 @@ export const accountColumns: ColumnDef<typeof accountSchema._type>[] = [
   },
   {
     id: 'actions',
+    header: accountColumnIdToHeaderTextMap.actions,
+    enableHiding: false,
     cell: ({ row }) => {
       const account = row.original;
       const [open, setOpen] = useState(false);

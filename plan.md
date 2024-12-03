@@ -36,6 +36,8 @@
     - [x] Show active accounts only by default
     - [x] Pad account number by default with option to reveal the full account number
     - [x] Hide the currency field by default
+  - [ ] Table columns
+    - [ ] Store visible column preference in local storage
   - [ ] Actions on views
     - [x] Delete account
     - [ ] View details

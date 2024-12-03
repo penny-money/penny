@@ -1,3 +1,4 @@
+import { formatAmount } from '@/utils/money';
 import {
   Card,
   CardContent,
@@ -5,10 +6,9 @@ import {
   CardHeader,
   CardTitle,
 } from '@repo/design-system/components/ui/card';
+import { cn } from '@repo/design-system/lib/utils';
 import { ArrowDownRight, ArrowUpRight } from 'lucide-react';
 import type { FC } from 'react';
-import { cn } from '@repo/design-system/lib/utils';
-import { formatAmount } from '@/utils/money';
 
 interface AccountCardProps {
   name: string;

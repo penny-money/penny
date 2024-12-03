@@ -1,9 +1,8 @@
 import { AccountSummaryCard } from '@/components/cards/account-summary-cards';
-import { database as db } from '@repo/database';
 import { CreateAccountForm } from '@/components/forms/create-account-form';
-import { Suspense } from 'react';
-import { DataTable } from '@/components/tables/data-table';
 import { accountColumns } from '@/components/tables/columns/accounts';
+import { AccountsTable } from '@/components/tables/filters/accounts';
+import { database as db } from '@repo/database';
 
 export const dynamic = 'force-dynamic';
 
@@ -19,29 +18,19 @@ export default async function AccountsPage() {
         <h2 className="text-neutral-500 text-sm">Summary</h2>
         <div className="flex flex-wrap gap-2">
           <div className="grow">
-            <Suspense
-              fallback={
-                <AccountSummaryCard {...fallbackSummary} variant="primary" />
-              }
-            >
-              <BalanceSummary />
-            </Suspense>
+            <BalanceSummary />
           </div>
           <div className="grow">
-            <Suspense fallback={<AccountSummaryCard {...fallbackSummary} />}>
-              <IncomeSummary />
-            </Suspense>
+            <IncomeSummary />
           </div>
           <div className="grow">
-            <Suspense fallback={<AccountSummaryCard {...fallbackSummary} />}>
-              <ExpenseSummary />
-            </Suspense>
+            <ExpenseSummary />
           </div>
         </div>
       </div>
       <div className="space-y-2">
         <h2 className="text-neutral-500 text-sm">All accounts.</h2>
-        <DataTable columns={accountColumns} data={accounts} />
+        <AccountsTable columns={accountColumns} data={accounts} />
       </div>
     </div>
   );
@@ -70,14 +59,9 @@ async function ExpenseSummary() {
 
 const getBalanceSummary = async () => {
   // BUG: The aggregate balance doesn't consider currencies of the accounts!
-  // We're now assuming single currency
   const balance = await db.account.aggregate({
-    _sum: {
-      balance: true,
-    },
-    where: {
-      isActive: true,
-    },
+    _sum: { balance: true },
+    where: { isActive: true },
   });
 
   return {
@@ -91,17 +75,8 @@ const getBalanceSummary = async () => {
 
 const getIncomeSummary = async () => {
   const income = await db.transaction.aggregate({
-    _sum: {
-      amount: true,
-    },
-    where: {
-      type: {
-        in: ['INCOME'],
-      },
-      account: {
-        isActive: true,
-      },
-    },
+    _sum: { amount: true },
+    where: { type: { in: ['INCOME'] }, account: { isActive: true } },
   });
 
   return {
@@ -115,17 +90,8 @@ const getIncomeSummary = async () => {
 
 const getExpenseSummary = async () => {
   const expense = await db.transaction.aggregate({
-    _sum: {
-      amount: true,
-    },
-    where: {
-      type: {
-        in: ['EXPENSE'],
-      },
-      account: {
-        isActive: true,
-      },
-    },
+    _sum: { amount: true },
+    where: { type: { in: ['EXPENSE'] }, account: { isActive: true } },
   });
 
   return {
@@ -135,12 +101,4 @@ const getExpenseSummary = async () => {
     currentAmount: expense._sum.amount ?? 0,
     previousAmount: undefined,
   };
-};
-
-const fallbackSummary = {
-  title: 'Loading...',
-  description: 'Loading summary',
-  currency: 'KES', // TODO: User's default currency
-  currentAmount: 0,
-  previousAmount: 0,
 };

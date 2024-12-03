@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@repo/design-system/components/ui/card';
-import { cn, cva, type VariantProps } from '@repo/design-system/lib/utils';
+import { type VariantProps, cn, cva } from '@repo/design-system/lib/utils';
 import { ArrowDownRight, ArrowUpRight } from 'lucide-react';
 import type { FC, HTMLAttributes } from 'react';
 
