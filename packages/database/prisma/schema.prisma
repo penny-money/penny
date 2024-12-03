@@ -12,14 +12,82 @@ datasource db {
   relationMode = "prisma"
 }
 
+// Enums
+enum AccountType {
+  BANK
+  MOBILE_MONEY
+  LOAN
+  INVESTMENT
+  CREDIT_CARD
+  CASH
+}
+
+enum BudgetCategory {
+  HOUSING
+  TRANSPORTATION
+  FOOD
+  UTILITIES
+  HEALTHCARE
+  SAVINGS
+  DEBT
+  ENTERTAINMENT
+  EDUCATION
+  SHOPPING
+  OTHER
+}
+
+enum Period {
+  DAILY
+  WEEKLY
+  MONTHLY
+  QUARTERLY
+  YEARLY
+}
+
+enum TransactionCategory {
+  SALARY
+  BUSINESS
+  GIFT
+  RENT
+  UTILITIES
+  GROCERIES
+  DINING
+  TRANSPORTATION
+  HEALTHCARE
+  EDUCATION
+  ENTERTAINMENT
+  SHOPPING
+  SAVINGS
+  INVESTMENT
+  DEBT_PAYMENT
+  OTHER
+}
+
+enum TransactionStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  CANCELLED
+}
+
+enum TransactionType {
+  INCOME
+  EXPENSE
+  TRANSFER
+}
+
+// End of Enums
+
+// Models
 model User {
   id        String   @id @default(cuid(2))
   clerkId   String   @unique
   createdAt DateTime @default(now()) @db.Timestamptz()
   updatedAt DateTime @updatedAt @db.Timestamptz()
 
-  accounts Account[]
-  budgets  Budget[]
+  accounts   Account[]
+  budgets    Budget[]
+  UserConfig UserConfig?
 }
 
 model Account {
@@ -54,15 +122,6 @@ model BalanceSnapshots {
   @@index([accountId])
 }
 
-enum AccountType {
-  BANK
-  MOBILE_MONEY
-  LOAN
-  INVESTMENT
-  CREDIT_CARD
-  CASH
-}
-
 model Budget {
   id                 String         @id @default(cuid(2))
   userId             String
@@ -91,28 +150,6 @@ model Budget {
   @@index([accountId])
 }
 
-enum Period {
-  DAILY
-  WEEKLY
-  MONTHLY
-  QUARTERLY
-  YEARLY
-}
-
-enum BudgetCategory {
-  HOUSING
-  TRANSPORTATION
-  FOOD
-  UTILITIES
-  HEALTHCARE
-  SAVINGS
-  DEBT
-  ENTERTAINMENT
-  EDUCATION
-  SHOPPING
-  OTHER
-}
-
 model Transaction {
   id          String              @id @default(cuid(2))
   accountId   String
@@ -132,34 +169,14 @@ model Transaction {
   @@index([budgetId])
 }
 
-enum TransactionType {
-  INCOME
-  EXPENSE
-  TRANSFER
+model UserConfig {
+  id              String  @id @default(cuid(2))
+  userId          String  @unique
+  defaultCurrency String?
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@index([userId])
 }
 
-enum TransactionStatus {
-  PENDING
-  COMPLETED
-  FAILED
-  CANCELLED
-}
-
-enum TransactionCategory {
-  SALARY
-  BUSINESS
-  GIFT
-  RENT
-  UTILITIES
-  GROCERIES
-  DINING
-  TRANSPORTATION
-  HEALTHCARE
-  EDUCATION
-  ENTERTAINMENT
-  SHOPPING
-  SAVINGS
-  INVESTMENT
-  DEBT_PAYMENT
-  OTHER
-}
+// End of Models
